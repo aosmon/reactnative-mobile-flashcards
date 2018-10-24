@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
 import AddDeck from './components/AddDeck'
-import AddQuestion from './components/AddQuestion'
+import AddCard from './components/AddCard'
 import { purple, white } from './utils/colors'
 import Quiz from './components/Quiz'
-import { createMaterialTopTabNavigator, StackNavigator } from 'react-navigation'
+import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 
 //import { createStore } from 'redux'
@@ -39,10 +39,10 @@ const Tabs = createMaterialTopTabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor:  Platform.OS === 'ios' ? purple : white,
+    activeTintColor:  white,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      backgroundColor: purple,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -54,13 +54,42 @@ const Tabs = createMaterialTopTabNavigator({
   }
 })
 
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTitle: 'Add Card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  }
+
+})
+
 export default class App extends React.Component {
   render() {
     return (
 //      <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
         <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Tabs />
+          <MainNavigator />
         </View>
 //      </Provider>
     );
