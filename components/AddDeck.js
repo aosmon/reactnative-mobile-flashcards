@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'
-import { TextInput } from 'react-native'
+import { TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
 
 class AddDeck extends Component {
@@ -11,6 +11,10 @@ class AddDeck extends Component {
 
 	onChangeText = (text) => {
 		this.setState({text})
+	}
+
+	addDeck = () => {
+
 	}
 
 	render() {
@@ -26,7 +30,14 @@ class AddDeck extends Component {
         	placeholder='Deck Title'
         	underlineColorAndroid="transparent" 
         	onChangeText={(text) => this.onChangeText(text)}
+        	autoCorrect={false}
         />
+        <TouchableOpacity
+           style = {styles.submitButton}
+           onPress = {() => this.addDeck()}
+        >
+           <Text style={styles.submitButtonText}> Submit </Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
 		)
 	}
@@ -64,16 +75,18 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       width: 300,
       padding: 10,
-      fontSize: 24
+      fontSize: 24,
+      borderRadius: 10
   },
   submitButton: {
-      backgroundColor: '#7a42f4',
-      padding: 10,
+      backgroundColor: '#000',
+      padding: 20,
       margin: 15,
-      height: 40,
+      borderRadius: 10
   },
   submitButtonText:{
-      color: 'white'
+      color: '#fff',
+      fontSize: 24
   }
 });
 
