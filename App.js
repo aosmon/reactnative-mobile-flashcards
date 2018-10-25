@@ -79,8 +79,17 @@ const MainNavigator = createStackNavigator({
         backgroundColor: purple,
       }
     }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTitle: 'Quiz',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
   }
-
 })
 
 export default class App extends React.Component {
