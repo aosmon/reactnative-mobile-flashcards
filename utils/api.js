@@ -11,7 +11,7 @@ export function getDeck (title) {
     .then((results) => {
       const data = JSON.parse(results)
       return data[title]
-    }
+    })
 }
 
 export function saveDeckTitle (title) {

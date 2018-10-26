@@ -1,10 +1,27 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
 import { connect } from 'react-redux'
+import { AppLoading} from 'expo'
+import { getDecks } from '../utils/api'
+import { receiveDecks } from '../actions/index'
 
 class DeckList extends Component {
 
+  state = {
+    ready: false
+  }
+
+  componentDidMount () {
+    const { dispatch } = this.props
+
+    getDecks()
+    .then((decks) => dispatch(receiveDecks(decks)))
+    .then(() => this.setState(() => ({ready: true})))
+  }
+
 	render() {
+
+    const { decks } = this.props
 
 		return(
       <View style={styles.container}>
@@ -30,10 +47,9 @@ class DeckList extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-
+function mapStateToProps (decks) {
   return {
-
+    decks
   }
 }
 
@@ -66,5 +82,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default DeckList
-//export default connect(mapStateToProps)(DeckList)
+export default connect(mapStateToProps)(DeckList)
