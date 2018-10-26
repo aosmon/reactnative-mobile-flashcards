@@ -21,9 +21,18 @@ class DeckList extends Component {
 
 	render() {
 
-    const { decks } = this.props
+    const { noDecks } = this.props
+
+    if(noDecks){
+      return (
+        <View style={styles.container}>
+          <Text style={styles.deckCardsAmount}>No decks</Text>
+        </View>
+      )
+    }
 
 		return(
+
       <View style={styles.container}>
 
         <TouchableOpacity 
@@ -40,14 +49,18 @@ class DeckList extends Component {
 	        	<Text style={styles.deckTitle}>Deck 2</Text>
 	        	<Text style={styles.deckCardsAmount}>3 cards</Text>
         	</View>
-
         </TouchableOpacity>
-      </View>			
+      </View>  
 		)
 	}
 }
 
 function mapStateToProps (decks) {
+  if(!Object.keys(decks).length){
+    return {
+      noDecks: true
+    }
+  }
   return {
     decks
   }
