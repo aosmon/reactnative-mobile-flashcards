@@ -8,12 +8,11 @@ import { purple, white } from './utils/colors'
 import Quiz from './components/Quiz'
 import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers/index'
 
-//import { createStore } from 'redux'
-//import { Provider } from 'react-redux'
-//import reducer from './reducers'
-
-function UdaciStatusBar ({backgroundColor, ...props}) {
+function MyStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -95,12 +94,12 @@ const MainNavigator = createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-//      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-        <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
+        <MyStatusBar backgroundColor={purple} barStyle="light-content" />
           <MainNavigator />
         </View>
-//      </Provider>
+      </Provider>
     );
   }
 }
