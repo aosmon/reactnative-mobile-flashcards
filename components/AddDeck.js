@@ -20,13 +20,12 @@ class AddDeck extends Component {
     this.props.dispatch(addDeck(title))
     saveDeckTitle(title)
     this.setState({text: ''})
-    //this.toHome()
+    this.toHome()
 	}
 
   toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+    this.props.navigation.navigate('DeckList')
   }
-
 
 	render() {
 
