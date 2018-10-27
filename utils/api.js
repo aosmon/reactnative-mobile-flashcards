@@ -1,5 +1,20 @@
 import { AsyncStorage } from 'react-native'
-import DECKS_STORAGE_KEY from './helpers'
+
+const DECKS_STORAGE_KEY = 'MobileFlashcards:decks'
+
+export function createStorage (title) {
+  console.log(DECKS_STORAGE_KEY)
+  return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({
+    [title]: { title: title, questions: [] } 
+  }))
+  .catch((error)=>{
+    console.log(error)
+  })
+}
+
+export function clearStorage () {
+  return AsyncStorage.clear()
+}
 
 export function getDecks () {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
@@ -15,9 +30,13 @@ export function getDeck (title) {
 }
 
 export function saveDeckTitle (title) {
+
   return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
     [title]: { title: title, questions: [] } 
   }))
+  .catch((error)=>{
+    console.log(error)
+  })
 }
 
 export function addCardToDeck (title, card) {
