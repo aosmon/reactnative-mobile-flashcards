@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'
-import { TextInput, Button } from 'react-native'
+import { TextInput} from 'react-native'
 import { connect } from 'react-redux'
+import { addDeck } from '../actions'
+import { saveDeckTitle, createStorage } from '../utils/api'
 
 class AddDeck extends Component {
 
@@ -9,13 +11,22 @@ class AddDeck extends Component {
 		text: ''
 	}
 
-	onChangeText = (text) => {
-		this.setState({text})
+	onChangeText = (title) => {
+		this.setState({text: title})
 	}
 
 	addDeck = () => {
-
+    const title = this.state.text
+    this.props.dispatch(addDeck(title))
+    saveDeckTitle(title)
+    this.setState({text: ''})
+    //this.toHome()
 	}
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+  }
+
 
 	render() {
 
@@ -43,10 +54,15 @@ class AddDeck extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-
+function mapStateToProps (decks) {
+  if(!Object.keys(decks).length){
+    return {
+      noDecks: true
+    }
+  }
   return {
-
+    decks,
+    noDecks: false
   }
 }
 
@@ -90,5 +106,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddDeck
-// export default connect(mapStateToProps)(AddDeck)
+export default connect(mapStateToProps)(AddDeck)
