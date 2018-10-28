@@ -35,6 +35,7 @@ class DeckDetails extends Component {
 	        </TouchableOpacity>
 	        <TouchableOpacity
 	  	      style = {styles.startQuizButton}
+            disabled={questions.length===0}
 		        onPress={() => this.props.navigation.navigate(
             	'Quiz',
             	{ deckId: title }
