@@ -28,7 +28,7 @@ class DeckDetails extends Component {
 	          style = {styles.addCardButton}
 						onPress={() => this.props.navigation.navigate(
             	'AddCard',
-            	{ deckId: '1' }
+            	{ deckId: title }
           	)}
 	        >
 	           <Text style={styles.addCardButtonText}> Add Card </Text>
@@ -37,7 +37,7 @@ class DeckDetails extends Component {
 	  	      style = {styles.startQuizButton}
 		        onPress={() => this.props.navigation.navigate(
             	'Quiz',
-            	{ deckId: '1' }
+            	{ deckId: title }
           	)}
 	        >
 	           <Text style={styles.startQuizButtonText}> Start Quiz </Text>
