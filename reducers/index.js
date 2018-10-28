@@ -7,14 +7,14 @@ function entries (state = {}, action) {
         ...state,
         ...action.decks,
       }
-    // case ADD_DECK :
-    //   return {
-    //     ...state,
-    //     [action.title]: {
-    //       title: action.title,
-    //       questions: []
-    //     }
-    //   }
+    case ADD_DECK :
+      return {
+        ...state,
+        [action.title]: {
+          title: action.title,
+          questions: []
+        }
+      }
     // case ADD_CARD :
     //   return {
     //     ...state,

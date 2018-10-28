@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet, Platform, KeyboardAvoidingVie
 import { TextInput} from 'react-native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
-import { saveDeckTitle, createStorage } from '../utils/api'
+import { saveDeckTitle} from '../utils/api'
 
 class AddDeck extends Component {
 
@@ -17,7 +17,9 @@ class AddDeck extends Component {
 
 	addDeck = () => {
     const title = this.state.text
-    this.props.dispatch(addDeck(title))
+    const { dispatch } = this.props
+
+    dispatch(addDeck(title))
     saveDeckTitle(title)
     this.setState({text: ''})
     this.toHome()

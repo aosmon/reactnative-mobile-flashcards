@@ -45,8 +45,18 @@ class DeckList extends Component {
 		return(
 
       <View style={styles.container}>
+
         {deckIds.map((deck)=>(
-          <DeckPreview title={deck} />
+          <TouchableOpacity 
+            style={styles.deckContainer}
+            key={deck} 
+            onPress={() => this.props.navigation.navigate(
+            'DeckDetails',
+            { deckId: deck }
+          )}>              
+
+            <DeckPreview title={deck} />
+          </TouchableOpacity>
         ))}
 
       </View>  
@@ -61,6 +71,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  deckCardsAmount: {
+    fontSize: 30,
+    color: '#666',
+    textAlign: 'center',
+    margin: 20
+  },
+  deckContainer: {
+    borderBottomWidth: 1,
+    borderColor: '#999',
+    width: '100%'
+  },
+
 });
 
 function mapStateToProps (decks) {

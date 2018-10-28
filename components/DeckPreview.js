@@ -6,18 +6,12 @@ class DeckPreview extends Component {
 
 	render() {
 
-		const {deck} = this.props
+		const { title, questions } = this.props
 
 		return (
-      <View key={deck.title} style={styles.deckContainer}>
-        <TouchableOpacity 
-          onPress={() => this.props.navigation.navigate(
-            'DeckDetails',
-            { deckId: deck.title }
-        )}>              
-        <Text style={styles.deckTitle}>{deck.title}</Text>
-        <Text style={styles.deckCardsAmount}>{deck.questions.length}</Text>            
-        </TouchableOpacity>
+			<View  style={styles.deckContainer}>
+        <Text style={styles.deckTitle}>{title}</Text>
+        <Text style={styles.deckCardsAmount}>{questions.length}</Text>            
       </View>
 		)
 	}
@@ -28,9 +22,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#999',
-    width: '100%'
   },
     deckTitle: {
 		fontSize: 30,
@@ -48,7 +39,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (decks, {title}) {
   return {
-    deck: decks[title]
+    title: decks[title].title,
+    questions: decks[title].questions
   }
 }
 
