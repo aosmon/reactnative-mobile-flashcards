@@ -1,6 +1,6 @@
 import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
-function entries (state = {}, action) {
+function decks (state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS :
       return {
@@ -15,20 +15,17 @@ function entries (state = {}, action) {
           questions: []
         }
       }
-    // case ADD_CARD :
-    //   return {
-    //     ...state,
-    //     [action.title]: {
-    //       ...state[action.title],
-    //       questions: ...state[action.title][questions].concat({
-    //         question: action.question,
-    //         answer: action.answer
-    //       })
-    //     }
-    //   }
+    case ADD_CARD :
+      return {
+        ...state,
+        [action.title]: {
+          ...state[action.title],
+          questions: state[action.title].questions.concat(action.card)
+        }
+      }
     default :
       return state
   }
 }
 
-export default entries
+export default decks
