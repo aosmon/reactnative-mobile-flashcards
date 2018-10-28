@@ -15,11 +15,13 @@ class DeckDetails extends Component {
 
 	render() {
 
+    const { title, questions } = this.props
+
 		return(
 			<View style={styles.container}>
 	      <View style={styles.container}>
-	        	<Text style={styles.deckTitle}>Deck Title</Text>
-	        	<Text style={styles.deckCardsAmount}>3 cards</Text>
+	        	<Text style={styles.deckTitle}>{title}</Text>
+	        	<Text style={styles.deckCardsAmount}>{questions.length} cards</Text>
 	      </View>			
 	      <View style={styles.container}>
 	        <TouchableOpacity
@@ -46,12 +48,6 @@ class DeckDetails extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-
-  return {
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -69,7 +65,8 @@ const styles = StyleSheet.create({
   deckCardsAmount: {
 		fontSize: 30,
 		color: '#666',
-		textAlign: 'center'
+		textAlign: 'center',
+		margin: 20
   },
 	input: {
       margin: 15,
@@ -109,5 +106,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DeckDetails
-//export default connect(mapStateToProps)(DeckDetails)
+function mapStateToProps (decks, { navigation }) {
+
+  const { deckId } = navigation.state.params
+
+  return {
+    title: decks[deckId].title,
+    questions: decks[deckId].questions
+  }
+}
+
+export default connect(mapStateToProps)(DeckDetails)
