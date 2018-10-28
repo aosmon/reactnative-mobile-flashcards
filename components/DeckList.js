@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { AppLoading} from 'expo'
 import { getDecks, clearStorage } from '../utils/api'
 import { receiveDecks } from '../actions/index'
+import DeckPreview from './DeckPreview'
 
 class DeckList extends Component {
 
@@ -31,7 +32,6 @@ class DeckList extends Component {
       return <AppLoading />
     }
 
-
     if(noDecks){
       return (
         <View style={styles.container}>
@@ -40,40 +40,18 @@ class DeckList extends Component {
       )
     }
 
-    const { decks, deckIds } = this.props
+    const { deckIds } = this.props
 
 		return(
 
       <View style={styles.container}>
         {deckIds.map((deck)=>(
-          <View key={decks[deck].title} style={styles.deckContainer}>
-            <TouchableOpacity 
-              onPress={() => this.props.navigation.navigate(
-                'DeckDetails',
-                { deckId: decks[deck].title }
-            )}>              
-            <Text style={styles.deckTitle}>{decks[deck].title}</Text>
-            <Text style={styles.deckCardsAmount}>{decks[deck].questions.length}</Text>            
-            </TouchableOpacity>
-          </View>
+          <DeckPreview title={deck} />
         ))}
 
       </View>  
 		)
 	}
-}
-
-function mapStateToProps (decks) {
-  if(!Object.keys(decks).length){
-    return {
-      noDecks: true
-    }
-  }
-  return {
-    decks,
-    deckIds: Object.keys(decks),
-    noDecks: false
-  }
 }
 
 const styles = StyleSheet.create({
@@ -83,26 +61,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  deckContainer: {
-    paddingTop: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#999',
-    width: '100%'
-  },
-    deckTitle: {
-		fontSize: 30,
-		textAlign: 'center',
-		fontWeight: 'bold'
-  },
-  deckCardsAmount: {
-		fontSize: 30,
-		color: '#666',
-		textAlign: 'center',
-		margin: 20
-  },
-
 });
+
+function mapStateToProps (decks) {
+  if(!Object.keys(decks).length){
+    return {
+      noDecks: true
+    }
+  }
+  return {
+    deckIds: Object.keys(decks),
+    noDecks: false
+  }
+}
 
 export default connect(mapStateToProps)(DeckList)
