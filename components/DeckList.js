@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Platform, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Platform, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { AppLoading} from 'expo'
 import { getDecks, clearStorage } from '../utils/api'
@@ -22,6 +22,18 @@ class DeckList extends Component {
     .then(() => this.setState(() => ({ready: true})))
   }
 
+  _renderItem = ({item}) => {
+    return <TouchableOpacity 
+        style={styles.deckContainer}
+        id={item.key} 
+        onPress={() => this.props.navigation.navigate(
+          'DeckDetails',
+          { deckId: item.key }
+        )}>              
+        <DeckPreview title={item.key} />
+      </TouchableOpacity>
+  }
+
 	render() {
 
     const { noDecks } = this.props
@@ -40,25 +52,13 @@ class DeckList extends Component {
     }
 
     const { deckIds } = this.props
+    const decksData = deckIds.map((id)=>({key: id}))
 
 		return(
 
-      <ScrollView>
-
-        {deckIds.map((deck)=>(
-          <TouchableOpacity 
-            style={styles.deckContainer}
-            key={deck} 
-            onPress={() => this.props.navigation.navigate(
-            'DeckDetails',
-            { deckId: deck }
-          )}>              
-
-            <DeckPreview title={deck} />
-          </TouchableOpacity>
-        ))}
-
-      </ScrollView> 
+      <FlatList 
+        data={decksData} 
+        renderItem={this._renderItem} /> 
 		)
 	}
 }
