@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Platform, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { AppLoading} from 'expo'
 import { getDecks, clearStorage } from '../utils/api'
@@ -20,7 +20,6 @@ class DeckList extends Component {
     getDecks()
     .then((decks) => dispatch(receiveDecks(decks)))
     .then(() => this.setState(() => ({ready: true})))
-
   }
 
 	render() {
@@ -44,7 +43,7 @@ class DeckList extends Component {
 
 		return(
 
-      <View style={styles.container}>
+      <ScrollView>
 
         {deckIds.map((deck)=>(
           <TouchableOpacity 
@@ -59,7 +58,7 @@ class DeckList extends Component {
           </TouchableOpacity>
         ))}
 
-      </View>  
+      </ScrollView> 
 		)
 	}
 }
@@ -92,7 +91,7 @@ function mapStateToProps (decks) {
     }
   }
   return {
-    deckIds: Object.keys(decks),
+    deckIds: Object.keys(decks).sort(),
     noDecks: false
   }
 }
