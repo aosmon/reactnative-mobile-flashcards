@@ -11,7 +11,7 @@ class DeckPreview extends Component {
 		return (
 			<View  style={styles.deckContainer}>
         <Text style={styles.deckTitle}>{title}</Text>
-        <Text style={styles.deckCardsAmount}>{questions.length}</Text>            
+        <Text style={styles.deckCardsAmount}>{questions.length} cards</Text>            
       </View>
 		)
 	}
@@ -23,16 +23,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-    deckTitle: {
+   deckTitle: {
 		fontSize: 30,
-		textAlign: 'center',
-		fontWeight: 'bold'
+		textAlign: 'left',
+		fontWeight: 'bold',
   },
   deckCardsAmount: {
-		fontSize: 30,
+		fontSize: 20,
 		color: '#666',
-		textAlign: 'center',
-		margin: 20
+		textAlign: 'right',
+		marginBottom: 40,
   },
 
 });
