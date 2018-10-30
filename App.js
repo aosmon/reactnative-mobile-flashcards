@@ -4,7 +4,7 @@ import DeckList from './components/DeckList'
 import DeckDetails from './components/DeckDetails'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
-import { purple, white } from './utils/colors'
+import { black, white } from './utils/colors'
 import Quiz from './components/Quiz'
 import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
@@ -42,7 +42,7 @@ const Tabs = createMaterialTopTabNavigator({
     activeTintColor:  white,
     style: {
       height: 56,
-      backgroundColor: purple,
+      backgroundColor: black,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -66,7 +66,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: black,
       }
     }
   },
@@ -76,7 +76,7 @@ const MainNavigator = createStackNavigator({
       headerTitle: 'Add Card',
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: black,
       }
     }
   },
@@ -86,7 +86,7 @@ const MainNavigator = createStackNavigator({
       headerTitle: 'Quiz',
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: black,
       }
     }
   }
@@ -102,7 +102,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-        <MyStatusBar backgroundColor={purple} barStyle="light-content" />
+        <MyStatusBar backgroundColor={black} barStyle="light-content" />
           <MainNavigator />
         </View>
       </Provider>
