@@ -38,10 +38,10 @@ New Question View
 ## Data
 AsyncStorage is used to store decks and flashcards locally.
 
-`{`
-`  React: {`
-`    title: 'React',`
-`    questions: [`
+```{
+  React: {`
+    title: 'React',
+    questions: [`
       {
         question: 'What is React?',
         answer: 'A library for managing user interfaces'
@@ -61,7 +61,7 @@ AsyncStorage is used to store decks and flashcards locally.
       }
     ]
   }
-}`
+}```
 
 ## API
 
