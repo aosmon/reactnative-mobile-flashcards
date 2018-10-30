@@ -11,6 +11,7 @@ import { Constants } from 'expo'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers/index'
+import { setLocalNotification } from './utils/helpers'
 
 function MyStatusBar ({backgroundColor, ...props}) {
   return (
@@ -92,6 +93,11 @@ const MainNavigator = createStackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>

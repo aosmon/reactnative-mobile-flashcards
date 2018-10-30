@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { white, black } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Quiz extends Component {
 
@@ -10,6 +11,11 @@ class Quiz extends Component {
 		showBackside: false,
 		showResults: false,
 		answersCorrect: 0
+	}
+
+	componentDidMount () {
+			clearLocalNotification()
+      .then(setLocalNotification)
 	}
 
 	flipCard = () => {
@@ -26,7 +32,7 @@ class Quiz extends Component {
 		?
 			this.setState((state)=>({
 				showResults: true
-			}))		
+			}))			
 		:
 			this.setState((state)=>({
 				currentCardIndex: state.currentCardIndex+1,
