@@ -8,20 +8,20 @@ import { saveDeckTitle} from '../utils/api'
 class AddDeck extends Component {
 
 	state = {
-		text: ''
+		title: ''
 	}
 
 	onChangeText = (title) => {
-		this.setState({text: title})
+		this.setState({title: title})
 	}
 
 	addDeck = () => {
-    const title = this.state.text
+    const title = this.state.title
     const { dispatch } = this.props
 
     dispatch(addDeck(title))
     saveDeckTitle(title)
-    this.setState({text: ''})
+    this.setState({title: ''})
     this.toHome()
 	}
 
@@ -38,7 +38,7 @@ class AddDeck extends Component {
         </View>
         <TextInput 
         	style={styles.input}
-        	value={this.state.text}
+        	value={this.state.title}
         	placeholder='Deck Title'
         	underlineColorAndroid="transparent" 
         	onChangeText={(text) => this.onChangeText(text)}
@@ -47,6 +47,7 @@ class AddDeck extends Component {
         <TouchableOpacity
            style = {styles.submitButton}
            onPress = {() => this.addDeck()}
+           disabled={this.state.title===''}
         >
            <Text style={styles.submitButtonText}> Submit </Text>
         </TouchableOpacity>
