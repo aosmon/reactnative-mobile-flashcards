@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Platform, KeyboardAvoidingView, ScrollView} from 'react-native'
 import { TextInput} from 'react-native'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
@@ -43,8 +43,8 @@ class AddCard extends Component {
 	render() {
 
 		return(
+      <ScrollView keyboardShouldPersistTaps='never' contentContainerStyle={styles.contentContainer}>
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-
         <Text style={styles.label}>Question:</Text>
         <TextInput 
         	style={styles.input}
@@ -55,7 +55,6 @@ class AddCard extends Component {
         	onChangeText={(q) => this.onChangeQuestion(q)}
         	autoCorrect={false}
         />
-
         <Text style={styles.label}>Answer</Text>
         <TextInput 
         	style={styles.input}
@@ -67,6 +66,7 @@ class AddCard extends Component {
         	autoCorrect={false}
         />
 
+
         <TouchableOpacity
            style = {styles.submitButton}
            onPress = {() => this.addCard()}
@@ -75,16 +75,21 @@ class AddCard extends Component {
            <Text style={styles.submitButtonText}> Submit </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-		)
+      </ScrollView>		
+    )
 	}
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contentContainer: {
     flex: 1,
+    paddingTop: 30,
+    backgroundColor: '#fff',
+  },
+  container: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingLeft: 20,
     paddingRight: 20
   },
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
   },
 	input: {
       margin: 15,
-      height: 200,
+      height: 120,
       borderColor: '#7a42f4',
       borderWidth: 1,
       width: 300,
@@ -111,11 +116,11 @@ const styles = StyleSheet.create({
       backgroundColor: '#000',
       padding: 20,
       margin: 15,
-      borderRadius: 10
+      borderRadius: 10,
   },
   submitButtonText:{
       color: '#fff',
-      fontSize: 24
+      fontSize: 24,
   }
 });
 
