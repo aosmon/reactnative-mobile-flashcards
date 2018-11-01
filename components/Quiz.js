@@ -190,14 +190,14 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   correctButton: {
-    backgroundColor: '#d60606',
+    backgroundColor: '#01a324',
     padding: 20,
     margin: 15,
     borderRadius: 10,
     width: 300      
 },
   incorrectButton: {
-    backgroundColor: '#01a324',
+    backgroundColor: '#d60606',
     padding: 20,
     margin: 15,
     borderRadius: 10,
