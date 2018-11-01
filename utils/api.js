@@ -50,7 +50,7 @@ export function addCardToDeck (title, card) {
     })
 }
 
-export function deleteDeck (title) {
+export function removeDeck (title) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then((results) => {
       const data = JSON.parse(results)

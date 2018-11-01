@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
-import { TextInput} from 'react-native'
+import { TextInput, Button} from 'react-native'
 import { connect } from 'react-redux'
+import { deleteDeck } from '../actions'
+import { removeDeck } from '../utils/api'
 
 class DeckDetails extends Component {
 
@@ -11,6 +13,14 @@ class DeckDetails extends Component {
     return {
       title: deckId
     }
+  }
+
+  deleteCurrentDeck = () => {
+    const { title, dispatch } = this.props
+
+    dispatch(deleteDeck(title))
+    removeDeck(title)
+    this.props.navigation.navigate('DeckList')
   }
 
 	render() {
@@ -43,6 +53,11 @@ class DeckDetails extends Component {
 	        >
 	           <Text style={styles.startQuizButtonText}> Start Quiz </Text>
 	        </TouchableOpacity>
+          <TouchableOpacity 
+            title='Delete deck'
+            onPress={this.deleteCurrentDeck}>
+              <Text style={styles.deleteButtonText}>Delete deck</Text>
+          </TouchableOpacity>
 	      </View>		
       </View>	
 		)
@@ -104,6 +119,10 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 24,
       textAlign: 'center'
+  },
+  deleteButtonText: {
+    color: '#d60606',
+    fontSize: 24,
   }
 });
 
